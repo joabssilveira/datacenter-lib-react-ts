@@ -1,10 +1,9 @@
+import LogoutIcon from '@mui/icons-material/Logout'
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material"
-import { authenticationStateLogout } from 'datacenter-lib-react-ts'
 import { IUser } from "datacenter-lib-common-ts"
 import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
-import { Link } from "react-router-dom"
-import LogoutIcon from '@mui/icons-material/Logout';
+import { authenticationStateLogout } from './authentication.slice'
 
 export interface IUserOptionsComponentProps {
   user: IUser,

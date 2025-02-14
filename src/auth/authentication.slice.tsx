@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts'
-import { IAuthenticationRequestBodyFromUuid } from 'datacenter-lib-common-ts';
-import { WebUtils } from 'fwork-jsts-common/src'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts';
+import { WebUtils } from 'fwork-jsts-common/src';
 import { jwtDecode } from 'jwt-decode'; // dont use jsonwebtokens package here, its only for node projects
 
 export interface IAuthenticationExt extends IAuthentication {
@@ -28,7 +27,8 @@ export const authenticationStateLoadFromApi = createAsyncThunk(
 
     onError?: (msg?: string) => void,
     onSuccess?: (authentication?: IAuthentication) => void,
-  }, { getState }) => {
+  // }, { getState }) => {
+  }) => {
     try {
       let result: IAuthenticationState = {}
 
@@ -52,6 +52,8 @@ export const authenticationStateLoadFromApi = createAsyncThunk(
     } catch (error) {
       if (arg.onError)
         arg.onError('Erro ao tentar autenticar')
+
+      return 
     }
   }
 )

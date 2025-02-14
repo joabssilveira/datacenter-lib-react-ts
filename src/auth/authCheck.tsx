@@ -10,12 +10,12 @@ import { AuthenticationType, IAuthenticationRequestBodyFromUuid } from "datacent
 export interface IAuthCheckComponentProps {
   authenticationState: IAuthenticationState,
   baseApiUrl: string,
-  authUrlBase: string,
-  redirectUrl: string,
+  // authUrlBase: string,
+  // redirectUrl: string,
   children: ReactNode;
 }
 
-export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authenticationState, authUrlBase, redirectUrl, baseApiUrl, children }) => {
+export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authenticationState, /*authUrlBase, redirectUrl,*/ baseApiUrl, children }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch<any>()
