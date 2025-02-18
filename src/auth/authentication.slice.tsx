@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts';
-import { WebUtils } from 'fwork-jsts-common/src';
+import { WebUtils } from 'fwork-jsts-common';
 import { jwtDecode } from 'jwt-decode'; // dont use jsonwebtokens package here, its only for node projects
 
 export interface IAuthenticationExt extends IAuthentication {
