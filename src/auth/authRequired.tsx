@@ -1,7 +1,7 @@
 
 import React, { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { IAuthenticationState } from "./authentication.slice";
+import { AuthenticationStateHelper, IAuthenticationState } from "./authentication.slice";
 import { AuthUtils } from "./authUtils";
 
 export interface IAuthRequiredComponentProps {
@@ -18,7 +18,8 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({ a
   const authUuid = queryParams.get(AuthUtils.authUuidQueryStringName)
 
   useEffect(() => {
-    if (!authenticationState.payload && !authenticationState.options?.loading) {
+    // if (!authenticationState.payload && !authenticationState.options?.loading) {
+    if (!new AuthenticationStateHelper({ state: authenticationState, }).authenticated && !authenticationState.options?.loading) {
       if (!authUuid) {
         if (!authUrlBase.includes('/login'))
           authUrlBase = `${authUrlBase}/login`
@@ -27,7 +28,8 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({ a
     }
   }, [authenticationState]);
 
-  if (!authenticationState.payload) {
+  // if (!authenticationState.payload) {
+  if (!new AuthenticationStateHelper({ state: authenticationState, }).authenticated) {
     return null;
   }
 

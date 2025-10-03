@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts';
 import { WebUtils } from 'fwork-jsts-common';
 import { jwtDecode } from 'jwt-decode'; // dont use jsonwebtokens package here, its only for node projects
+import moment from 'moment';
 
 export interface IAuthenticationExt extends IAuthentication {
   user: IUser
@@ -11,7 +12,7 @@ export interface IAuthenticationState {
   options?: {
     loading?: boolean,
   },
-  payload?: IAuthenticationExt
+  payload?: IAuthenticationExt,
 }
 
 const cookie = WebUtils.getCookie('@authenticationState')
@@ -27,7 +28,7 @@ export const authenticationStateLoadFromApi = createAsyncThunk(
 
     onError?: (msg?: string) => void,
     onSuccess?: (authentication?: IAuthentication) => void,
-  // }, { getState }) => {
+    // }, { getState }) => {
   }) => {
     try {
       let result: IAuthenticationState = {}
@@ -53,7 +54,7 @@ export const authenticationStateLoadFromApi = createAsyncThunk(
       if (arg.onError)
         arg.onError('Erro ao tentar autenticar')
 
-      return 
+      return
     }
   }
 )
@@ -95,3 +96,27 @@ export const authenticationSlice = createSlice({
 export const { logout: authenticationStateLogout, set: authenticationStateSet } = authenticationSlice.actions
 
 export default authenticationSlice.reducer
+
+export class AuthenticationStateHelper {
+  state: IAuthenticationState
+
+  constructor(args: {
+    state: IAuthenticationState
+  }) {
+    this.state = args.state
+  }
+
+  get authenticated(): boolean {
+    let result = false
+
+    if (this.state.payload?.token)
+      try {
+        var decToken: IAuthenticationTokenData = jwtDecode(this.state.payload?.token)
+        result = (decToken.exp || 0) >= moment().unix()
+      } catch (error) {
+        result = false
+      }
+
+    return result
+  }
+}

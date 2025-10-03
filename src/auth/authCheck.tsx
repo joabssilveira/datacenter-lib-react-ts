@@ -1,21 +1,18 @@
 
-import React, { ReactNode, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { authenticationStateLoadFromApi, IAuthenticationState } from "./authentication.slice";
-import { AuthUtils } from "./authUtils";
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux";
 import { AuthenticationType, IAuthenticationRequestBodyFromUuid } from "datacenter-lib-common-ts";
+import React, { ReactNode, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthenticationStateHelper, authenticationStateLoadFromApi, IAuthenticationState } from "./authentication.slice";
+import { AuthUtils } from "./authUtils";
 
 export interface IAuthCheckComponentProps {
   authenticationState: IAuthenticationState,
   baseApiUrl: string,
-  // authUrlBase: string,
-  // redirectUrl: string,
   children: ReactNode;
 }
 
-export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authenticationState, /*authUrlBase, redirectUrl,*/ baseApiUrl, children }) => {
+export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authenticationState, baseApiUrl, children }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch<any>()
@@ -30,7 +27,8 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authent
   }
 
   useEffect(() => {
-    if (!authenticationState.payload && !authenticationState.options?.loading) {
+    // if (!authenticationState.payload && !authenticationState.options?.loading) {
+    if (!new AuthenticationStateHelper({ state: authenticationState }).authenticated && !authenticationState.options?.loading) {
       if (authUuid) {
         dispatch(authenticationStateLoadFromApi({
           baseApiUrl,
@@ -43,7 +41,8 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authent
         }))
       }
     }
-    else if (authenticationState.payload && authUuid) {
+    // else if (authenticationState.payload && authUuid) {
+    else if (new AuthenticationStateHelper({ state: authenticationState }).authenticated && authUuid) {
       // caso o usuario ja tenha logado e tente acessar a pagina de autenticacao, o redirect manda o authUuid
       // nesse cenario, deve-se eliminar o authUuid da url
       // isso vale para autenticacao em um dominio diferente do dominio do autenticador
