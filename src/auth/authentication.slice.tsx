@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts';
 import { WebUtils } from 'fwork-jsts-common';
 import { jwtDecode } from 'jwt-decode'; // dont use jsonwebtokens package here, its only for node projects
@@ -63,7 +63,7 @@ export const authenticationSlice = createSlice({
   name: 'authenticationSlice',
   initialState: initState,
   reducers: {
-    set: (state, action) => {
+    set: (state, action: PayloadAction<IAuthenticationState>) => {
       state.payload = action.payload.payload
       WebUtils.setCookie('@authenticationState', JSON.stringify(state), 1)
     },

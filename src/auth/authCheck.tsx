@@ -27,7 +27,6 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authent
   }
 
   useEffect(() => {
-    // if (!authenticationState.payload && !authenticationState.options?.loading) {
     if (!new AuthenticationStateHelper({ state: authenticationState }).authenticated && !authenticationState.options?.loading) {
       if (authUuid) {
         dispatch(authenticationStateLoadFromApi({
@@ -41,16 +40,14 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({ authent
         }))
       }
     }
-    // else if (authenticationState.payload && authUuid) {
     else if (new AuthenticationStateHelper({ state: authenticationState }).authenticated && authUuid) {
-      // caso o usuario ja tenha logado e tente acessar a pagina de autenticacao, o redirect manda o authUuid
+      // caso o usuario ja tenha logado e tenta acessar a pagina de autenticacao, o redirect manda o authUuid
       // nesse cenario, deve-se eliminar o authUuid da url
       // isso vale para autenticacao em um dominio diferente do dominio do autenticador
       // para recursos no mesmo dominio do autenticador, o redirect quando o usuario já tem autenticado esta correto, ou seja, 
-      // ele nao manda o authUuid caso o usuario já esteja logado, em dominio diferentes nao tem como o autenticador saber se o app esta logado
+      // ele nao manda o authUuid caso o usuario já esteja logado, em dominios diferentes nao tem como o autenticador saber se o app esta logado
       onGetAuthFinish()
     }
-    // }, [authenticationState, location]);
   }, [authenticationState]);
 
   return <>{children}</>
