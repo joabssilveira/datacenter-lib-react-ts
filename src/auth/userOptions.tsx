@@ -1,9 +1,10 @@
-import LogoutIcon from '@mui/icons-material/Logout'
-import { Avatar, IconButton, Menu, MenuItem } from "@mui/material"
+import PersonIcon from "@mui/icons-material/Person"
+import { Avatar, IconButton } from "@mui/material"
 import { IUser } from "datacenter-lib-common-ts"
 import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { authenticationStateLogout } from './authentication.slice'
+import { UserDropdownMenu } from './userDropdownMenu'
 
 export interface IUserOptionsComponentProps {
   user: IUser,
@@ -17,38 +18,27 @@ export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ use
   const openMenu = Boolean(menuAnchor)
 
   return <>
-    <Menu
-      id="basic-menu"
+    <UserDropdownMenu
+      user={user}
       anchorEl={menuAnchor}
       open={openMenu}
       onClose={() => setAnchorElemnt(null)}
-      MenuListProps={{
-        'aria-labelledby': 'basic-button',
-      }}>
-      <MenuItem
-        style={{ display: 'flex', gap: 10 }}
-        onClick={() => {
-          let authUrl = `${datacenterAuthBaseUrl}/profile`
-          window.open(authUrl, '_blank')?.focus()
-          setAnchorElemnt(null)
-        }}
-      >
-        {user.name}
-      </MenuItem>
-      <MenuItem
-        style={{ display: 'flex', gap: 10 }}
-        onClick={() => {
-          dispatch(authenticationStateLogout())
-          if (onLogOut) onLogOut()
-          setAnchorElemnt(null)
-        }}
-      >
-        <LogoutIcon /> Sair
-      </MenuItem>
-    </Menu>
+      onLogOut={() => {
+        dispatch(authenticationStateLogout())
+        if (onLogOut) onLogOut()
+        setAnchorElemnt(null)
+      }}
+      onProfile={() => {
+        let authUrl = `${datacenterAuthBaseUrl}/profile`
+        window.open(authUrl, '_blank')?.focus()
+        setAnchorElemnt(null)
+      }}
+    />
 
     <IconButton
       onClick={e => setAnchorElemnt(e.currentTarget)}
-    ><Avatar src={user.imageUrl} /></IconButton>
+    ><Avatar src={user.imageUrl}>
+        <PersonIcon />
+      </Avatar></IconButton>
   </>
 }
