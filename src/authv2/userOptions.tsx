@@ -2,9 +2,8 @@ import PersonIcon from "@mui/icons-material/Person"
 import { Avatar, IconButton } from "@mui/material"
 import { IUser } from "datacenter-lib-common-ts"
 import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { authenticationStateLogout } from './authentication.slice'
 import { UserDropdownMenu } from './userDropdownMenu'
+import { useAuth } from "./authHook"
 
 export interface IUserOptionsComponentProps {
   user: IUser,
@@ -13,9 +12,9 @@ export interface IUserOptionsComponentProps {
 }
 
 export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ user, datacenterAuthBaseUrl, onLogOut }) => {
-  const dispatch = useDispatch<any>()
   const [menuAnchor, setAnchorElemnt] = useState<Element | (() => Element) | null | undefined>(null)
   const openMenu = Boolean(menuAnchor)
+  const auth = useAuth()
 
   return <>
     <UserDropdownMenu
@@ -24,8 +23,8 @@ export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ use
       open={openMenu}
       onClose={() => setAnchorElemnt(null)}
       onLogOut={() => {
-        dispatch(authenticationStateLogout())
-        if (onLogOut) onLogOut()
+        auth.logout()
+        onLogOut?.()
         setAnchorElemnt(null)
       }}
       onProfile={() => {

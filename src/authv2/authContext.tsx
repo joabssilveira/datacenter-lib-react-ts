@@ -5,7 +5,7 @@ import { IAuthenticationExt } from "./authProvider"
 export interface AuthContextType {
   authData?: IAuthenticationExt
   loading?: boolean
-  authenticated: boolean
+  isAuthenticated: boolean
   login: (arg: {
     baseApiUrl: string,
     requestPayload: IAuthenticationRequestBodyDefault | IAuthenticationRequestBodyFromUuid | IAuthenticationRequestBodyFromGoogleToken,

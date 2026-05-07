@@ -5,7 +5,7 @@ import { MdLogout } from "react-icons/md"
 
 interface Props {
   user: IUser,
-  anchorEl?: Element | PopoverVirtualElement | (() => Element) | (() => PopoverVirtualElement) | null | undefined
+  anchorEl?: Element | PopoverVirtualElement | (() => Element | PopoverVirtualElement | null) | null | undefined
   open: boolean
   onClose?: () => void
   onLogOut?: () => void

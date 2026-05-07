@@ -38,8 +38,7 @@ export function AuthProvider({ baseApiUrl, children }: Props) {
   }) => {
     try {
       setLoading(true)
-      const url = `${baseApiUrl}${ApiRoutesNames.authentications}`
-      const res = await fetch(url, {
+      const res = await fetch(`${baseApiUrl}${ApiRoutesNames.authentications}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -81,7 +80,7 @@ export function AuthProvider({ baseApiUrl, children }: Props) {
       value={{
         authData,
         loading,
-        authenticated: !!authData?.token,
+        isAuthenticated: !!authData?.token,
         login,
         logout,
       }}
