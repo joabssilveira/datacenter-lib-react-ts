@@ -18,7 +18,7 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({
   const auth = useAuth()
 
   useEffect(() => {
-    if (!auth.authenticated && !auth.loading) {
+    if (!auth.isAuthenticated && !auth.loading) {
       if (!authUuid) {
         if (!authUrlBase.includes('/login'))
           authUrlBase = `${authUrlBase}/login`
@@ -33,9 +33,9 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({
         window.location.href = `${authUrlBase}?${AuthUtils.authToRedirectQueryStringName}=${encodeURIComponent(redirectUrl)}`
       }
     }
-  }, [auth.authenticated, authUuid]);
+  }, [auth.isAuthenticated, auth.loading]);
 
-  if (!auth.authenticated) 
+  if (!auth.isAuthenticated) 
     return null;
 
   return <>{children}</>

@@ -1,28 +1,25 @@
-import { Box, Divider, Menu, MenuItem, PopoverVirtualElement, Typography } from "@mui/material"
-import { useAuth } from "datacenter-lib-react-ts-v2"
+import { Divider, ListItemText, Menu, MenuItem, PopoverVirtualElement } from "@mui/material"
+import { IUser } from "datacenter-lib-common-ts"
 import React from "react"
 import { MdLogout } from "react-icons/md"
 
 interface Props {
-  anchorEl?: Element | PopoverVirtualElement | (() => Element) | (() => PopoverVirtualElement) | null | undefined
+  user: IUser,
+  anchorEl?: Element | PopoverVirtualElement | (() => Element | PopoverVirtualElement | null) | null | undefined
   open: boolean
-  onClose: () => void
-  onLogOut: () => void
+  onClose?: () => void
+  onLogOut?: () => void
   onProfile?: () => void
 }
 
 export const UserDropdownMenu = ({
+  user,
   anchorEl,
   open,
   onClose,
   onLogOut,
   onProfile,
 }: Props) => {
-  const auth = useAuth()
-
-  const username = auth.authData?.user.name;
-  const email = auth.authData?.user.email;
-
   return (
     <>
       <Menu
@@ -44,42 +41,20 @@ export const UserDropdownMenu = ({
       >
         <MenuItem
           onClick={onProfile}
+          sx={{
+            gap: 1,
+            p: 2,
+            // py: 1.2,
+            fontWeight: 500,
+          }}
         >
-          <Box
-            sx={{
-              px: 2,
-              py: 1.5,
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                borderRadius: 1,
-                px: 1,
-                py: 0.5,
-              }}
-            >
-              <Typography fontSize={14} fontWeight={600} noWrap>
-                {username}
-              </Typography>
-
-            </Box>
-
-            {/* Email */}
-            <Typography
-              fontSize={12}
-              color="text.secondary"
-              noWrap
-              sx={{ mt: 0.5, px: 1 }}
-            >
-              {email}
-            </Typography>
-          </Box>
+          <ListItemText 
+            primary={user.name}
+            secondary={user.email}
+          />
         </MenuItem>
 
-        <Divider />
+        <Divider style={{margin: 0}}/>
 
         {/* Logout */}
         <MenuItem

@@ -1,13 +1,20 @@
 import { AuthCheckComponent, IAuthCheckComponentProps, } from './auth/authCheck'
-import authenticationReducer, { authenticationStateLoadFromApi, AuthenticationStateHelper, IAuthenticationState, IAuthenticationExt, authenticationStateLogout, authenticationSlice, authenticationStateSet, } from './auth/authentication.slice'
+import { AuthContext, AuthContextType, } from './auth/authContext'
+import { useAuth, } from './auth/authHook'
+import { AuthProvider, IAuthenticationExt, } from './auth/authProvider'
 import { AuthRequiredComponent, IAuthRequiredComponentProps, } from './auth/authRequired'
 import { AuthUtils, } from './auth/authUtils'
-import { UserOptionsComponent, IUserOptionsComponentProps, } from './auth/userOptions'
+import { UserDropdownMenu, } from './auth/userDropdownMenu'
+import { IUserOptionsComponentProps, UserOptionsComponent, } from './auth/userOptions'
+
 
 export {
   AuthCheckComponent, IAuthCheckComponentProps,
-  authenticationReducer, authenticationStateLoadFromApi, AuthenticationStateHelper, IAuthenticationExt, IAuthenticationState, authenticationStateLogout, authenticationSlice, authenticationStateSet,
+  AuthContext, AuthContextType,
+  useAuth,
+  AuthProvider, IAuthenticationExt,
   AuthRequiredComponent, IAuthRequiredComponentProps,
   AuthUtils,
-  UserOptionsComponent, IUserOptionsComponentProps,
+  UserDropdownMenu,
+  IUserOptionsComponentProps, UserOptionsComponent,
 }

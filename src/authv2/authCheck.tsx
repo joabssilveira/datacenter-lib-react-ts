@@ -26,7 +26,7 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({
   }
 
   useEffect(() => {
-    if (!auth.authenticated && !auth.loading) {
+    if (!auth.isAuthenticated && !auth.loading) {
       if (authUuid) {
         auth.login({
           baseApiUrl,
@@ -40,7 +40,7 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({
       }
     }
     // else if (new AuthenticationStateHelper({ state: authenticationState }).authenticated && authUuid) {
-    else if (auth.authenticated && authUuid) {
+    else if (auth.isAuthenticated && authUuid) {
       // caso o usuario ja tenha logado e tenta acessar a pagina de autenticacao, o redirect manda o authUuid
       // nesse cenario, deve-se eliminar o authUuid da url
       // isso vale para autenticacao em um dominio diferente do dominio do autenticador
@@ -48,7 +48,7 @@ export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({
       // ele nao manda o authUuid caso o usuario já esteja logado, em dominios diferentes nao tem como o autenticador saber se o app esta logado
       onGetAuthFinish()
     }
-  }, [auth.authenticated, authUuid]);
+  }, [auth.isAuthenticated, auth.loading, authUuid]);
 
   return <>{children}</>
 };

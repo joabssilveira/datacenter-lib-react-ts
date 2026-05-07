@@ -18,6 +18,7 @@ export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ use
 
   return <>
     <UserDropdownMenu
+      user={user}
       anchorEl={menuAnchor}
       open={openMenu}
       onClose={() => setAnchorElemnt(null)}
