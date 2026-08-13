@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthenticationsApiClient, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from 'datacenter-lib-common-ts';
-import { WebUtils } from 'fwork-jsts-common';
+import { BrowserUtils } from 'fwork-jsts-browser';
 import { jwtDecode } from 'jwt-decode'; // dont use jsonwebtokens package here, its only for node projects
 import moment from 'moment';
 
@@ -15,7 +15,7 @@ export interface IAuthenticationState {
   payload?: IAuthenticationExt,
 }
 
-const cookie = WebUtils.getCookie('@authenticationState')
+const cookie = BrowserUtils.getCookie('@authenticationState')
 const cookieObj = cookie ? JSON.parse(cookie) : null
 
 const initState: IAuthenticationState = cookieObj || {}
@@ -65,12 +65,12 @@ export const authenticationSlice = createSlice({
   reducers: {
     set: (state, action: PayloadAction<IAuthenticationState>) => {
       state.payload = action.payload.payload
-      WebUtils.setCookie('@authenticationState', JSON.stringify(state), 1)
+      BrowserUtils.setCookie('@authenticationState', JSON.stringify(state), 1)
     },
     logout: (state) => {
       state.options = undefined
       state.payload = undefined
-      WebUtils.setCookie('@authenticationState', '', -1)
+      BrowserUtils.setCookie('@authenticationState', '', -1)
     },
   },
   extraReducers: (builder) => {
@@ -84,7 +84,7 @@ export const authenticationSlice = createSlice({
         state.options.loading = false
       state.payload = response.payload?.payload
       if (state.payload)
-        WebUtils.setCookie('@authenticationState', JSON.stringify(state), 1)
+        BrowserUtils.setCookie('@authenticationState', JSON.stringify(state), 1)
     })
     builder.addCase(authenticationStateLoadFromApi.rejected, (state) => {
       if (state.options)
