@@ -1,31 +1,29 @@
 {
 	"author": "joabssilveira",
 	"dependencies": {
-		"@emotion/react": "^11.13.5",
-		"@emotion/styled": "^11.13.5",
-		"@mui/icons-material": "^6.3.1",
-		"@mui/material": "^6.1.8",
-		"@reduxjs/toolkit": "^1.8.6",
-		"@types/react": "^18.3.12",
-		"@types/react-dom": "^18.3.1",
-		"datacenter-lib-common-ts": "^1.2.4",
-		"fwork-jsts-browser": "^0.0.3",
-		"jwt-decode": "^4.0.0",
-		"react": "^17.0.0 || ^18.0.0",
-		"react-dom": "^17.0.0 || ^18.0.0",
-		"react-icons": "^4.6.0",
-		"react-redux": "^8.0.4",
-		"react-router-dom": "^6.4.3",
-		"redux-persist": "^6.0.0",
-		"redux-thunk": "^2.4.1"
+		"@emotion/react": "11.14.0",
+		"@emotion/styled": "11.14.1",
+		"@mui/icons-material": "9.3.1",
+		"@mui/material": "9.3.1",
+		"@reduxjs/toolkit": "2.12.0",
+		"datacenter-lib-common-ts": "1.2.5",
+		"fwork-jsts-browser": "0.0.6",
+		"jwt-decode": "4.0.0",
+		"react": "19.2.8",
+		"react-dom": "19.2.8",
+		"react-icons": "5.7.0",
+		"react-redux": "9.3.0",
+		"react-router-dom": "7.18.2"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^21.2.2",
-		"@commitlint/config-conventional": "^21.2.2",
-		"@types/node": "^22.10.5",
-		"husky": "^9.1.7",
-		"standard-version": "^9.5.0",
-		"typescript": "^5.6.3"
+		"@commitlint/cli": "21.2.2",
+		"@commitlint/config-conventional": "21.2.2",
+		"@types/node": "26.4.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+		"husky": "9.1.7",
+		"standard-version": "9.5.0",
+		"typescript": "5.9.3"
 	},
 	"engines": {
 		"node": ">=10"
@@ -50,8 +48,8 @@
 	"types": "dist/types/index.d.ts",
 	"name": "datacenter-lib-react-ts",
 	"peerDependencies": {
-		"react": "^17.0.0 || ^18.0.0",
-		"react-dom": "^17.0.0 || ^18.0.0"
+		"react": "17.0.0 || 18.0.0",
+		"react-dom": "17.0.0 || 18.0.0"
 	},
 	"prettier": {
 		"printWidth": 80,

@@ -1,0 +1,6 @@
+@use '../../style/index.module.scss' as style;
+
+.root {
+  display: flex;
+  flex-direction: column;
+}

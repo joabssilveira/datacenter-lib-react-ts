@@ -2,7 +2,8 @@
 import React, { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "./authHook";
-import { AuthUtils } from "./authUtils";
+import { AuthUtils } from "../common";
+import { BrowserUtils } from "fwork-jsts-browser";
 
 export interface IAuthRequiredComponentProps {
   authUrlBase: string,
@@ -27,7 +28,7 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({
         sessionStorage.clear()
         document.cookie.split(";").forEach(cookie => {
           const name = cookie.split("=")[0].trim();
-          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          BrowserUtils.deleteCookie(name)
         });
 
         window.location.href = `${authUrlBase}?${AuthUtils.authToRedirectQueryStringName}=${encodeURIComponent(redirectUrl)}`

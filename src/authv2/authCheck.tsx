@@ -2,8 +2,8 @@
 import { AuthenticationType, IAuthenticationRequestBodyFromUuid } from "datacenter-lib-common-ts";
 import React, { ReactNode, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthUtils } from "./authUtils";
 import { useAuth } from "./authHook";
+import { AuthUtils } from "../common";
 
 export interface IAuthCheckComponentProps {
   baseApiUrl: string,

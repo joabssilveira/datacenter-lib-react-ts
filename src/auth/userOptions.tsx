@@ -1,44 +1,46 @@
-import PersonIcon from "@mui/icons-material/Person"
-import { Avatar, IconButton } from "@mui/material"
-import { IUser } from "datacenter-lib-common-ts"
-import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
-import { authenticationStateLogout } from './authentication.slice'
-import { UserDropdownMenu } from './userDropdownMenu'
+// import PersonIcon from "@mui/icons-material/Person"
+// import { Avatar, IconButton } from "@mui/material"
+// import { IUser } from "datacenter-lib-common-ts"
+// import React, { useState } from "react"
+// import { useDispatch } from 'react-redux'
+// import { authenticationStateLogout } from './authentication.slice'
+// import { UserDropdownMenu } from './userDropdownMenu'
+// import { windowOpenOnce } from "fwork-jsts-browser"
 
-export interface IUserOptionsComponentProps {
-  user: IUser,
-  datacenterAuthBaseUrl: string,
-  onLogOut?: () => void
-}
+// export interface IUserOptionsComponentProps {
+//   user: IUser,
+//   datacenterAuthBaseUrl: string,
+//   onLogOut?: () => void
+// }
 
-export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ user, datacenterAuthBaseUrl, onLogOut }) => {
-  const dispatch = useDispatch<any>()
-  const [menuAnchor, setAnchorElemnt] = useState<Element | (() => Element) | null | undefined>(null)
-  const openMenu = Boolean(menuAnchor)
+// export const UserOptionsComponent: React.FC<IUserOptionsComponentProps> = ({ user, datacenterAuthBaseUrl, onLogOut }) => {
+//   const dispatch = useDispatch<any>()
+//   const [menuAnchor, setAnchorElemnt] = useState<Element | (() => Element) | null | undefined>(null)
+//   const openMenu = Boolean(menuAnchor)
 
-  return <>
-    <UserDropdownMenu
-      user={user}
-      anchorEl={menuAnchor}
-      open={openMenu}
-      onClose={() => setAnchorElemnt(null)}
-      onLogOut={() => {
-        dispatch(authenticationStateLogout())
-        if (onLogOut) onLogOut()
-        setAnchorElemnt(null)
-      }}
-      onProfile={() => {
-        let authUrl = `${datacenterAuthBaseUrl}/profile`
-        window.open(authUrl, '_blank')?.focus()
-        setAnchorElemnt(null)
-      }}
-    />
+//   return <>
+//     <UserDropdownMenu
+//       user={user}
+//       anchorEl={menuAnchor}
+//       open={openMenu}
+//       onClose={() => setAnchorElemnt(null)}
+//       onLogOut={() => {
+//         dispatch(authenticationStateLogout())
+//         if (onLogOut) onLogOut()
+//         setAnchorElemnt(null)
+//       }}
+//       onProfile={() => {
+//         let authUrl = `${datacenterAuthBaseUrl}/profile`
+//         // window.open(authUrl, '_blank')?.focus()
+//         windowOpenOnce(authUrl, authUrl)
+//         setAnchorElemnt(null)
+//       }}
+//     />
 
-    <IconButton
-      onClick={e => setAnchorElemnt(e.currentTarget)}
-    ><Avatar src={user.imageUrl}>
-        <PersonIcon />
-      </Avatar></IconButton>
-  </>
-}
+//     <IconButton
+//       onClick={e => setAnchorElemnt(e.currentTarget)}
+//     ><Avatar src={user.imageUrl}>
+//         <PersonIcon />
+//       </Avatar></IconButton>
+//   </>
+// }

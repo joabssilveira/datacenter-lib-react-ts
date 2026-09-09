@@ -1,6 +1,8 @@
 import { ApiRoutesNames, IAuthentication, IAuthenticationRequestBodyDefault, IAuthenticationRequestBodyFromGoogleToken, IAuthenticationRequestBodyFromUuid, IAuthenticationTokenData, IUser } from "datacenter-lib-common-ts"
+import { BrowserUtils } from "fwork-jsts-browser"
 import { jwtDecode } from "jwt-decode"
 import React, { ReactNode, useEffect, useState } from "react"
+import { authCookieName } from "../common"
 import { AuthContext } from "./authContext"
 
 interface Props {
@@ -14,20 +16,24 @@ export interface IAuthenticationExt extends IAuthentication {
 
 export function AuthProvider({ baseApiUrl, children }: Props) {
   const [authData, setAuthData] = useState<IAuthenticationExt | undefined>()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const storedAuthenticationDataStr = localStorage.getItem("@authentication")
-    if (storedAuthenticationDataStr) {
-      const storedAuthenticationData: IAuthenticationExt = JSON.parse(storedAuthenticationDataStr)
-      const decoded = jwtDecode<IAuthenticationTokenData>(storedAuthenticationData.token)
+    const storedAuthenticationData: IAuthenticationExt | undefined = BrowserUtils.getCookieObj(authCookieName)
+    if (storedAuthenticationData) {
+      try {
+        const decoded = jwtDecode<IAuthenticationTokenData>(storedAuthenticationData.token)
 
-      if ((decoded.exp ?? 0) * 1000 < Date.now()) {
-        localStorage.removeItem("@authentication")
-        return
+        if ((decoded.exp ?? 0) * 1000 < Date.now()) {
+          BrowserUtils.deleteCookie(authCookieName)
+          return
+        }
+        setAuthData(storedAuthenticationData)
+      } catch (error) {
+        console.log(error)
       }
-      setAuthData(storedAuthenticationData)
     }
+    setLoading(false)
   }, [])
 
   const login = async (arg: {
@@ -52,12 +58,11 @@ export function AuthProvider({ baseApiUrl, children }: Props) {
 
         const authData = {
           ...data,
-          user: decToken.user
-        } as IAuthenticationExt
+          user: decToken.user,
+        } satisfies IAuthenticationExt
         setAuthData(authData)
 
-        localStorage.setItem("@authentication", JSON.stringify(authData))
-
+        BrowserUtils.setCookie(authCookieName, JSON.stringify(authData), 1)
         arg.onSuccess?.(authData)
       } else {
         arg.onError?.()
@@ -71,8 +76,7 @@ export function AuthProvider({ baseApiUrl, children }: Props) {
 
   const logout = () => {
     setAuthData(undefined)
-
-    localStorage.removeItem("@authentication")
+    BrowserUtils.deleteCookie(authCookieName)
   }
 
   return (

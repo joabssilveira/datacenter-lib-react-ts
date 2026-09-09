@@ -28,16 +28,31 @@ export const UserDropdownMenu = ({
         onClose={onClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
-        PaperProps={{
-          sx: {
-            marginTop: .5,
-            minWidth: 260,
-            borderRadius: 2,
-            boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-            overflow: "hidden",
+        // TODO-propriedades nao existem na versao 9
+        slotProps={{
+          paper: {
+            sx: {
+              marginTop: .5,
+              minWidth: 260,
+              borderRadius: 2,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+              overflow: "hidden",
+            },
           },
+          list: {
+            sx: { p: 0 }
+          }
         }}
-        MenuListProps={{ sx: { p: 0 } }}
+        // PaperProps={{
+        //   sx: {
+        //     marginTop: .5,
+        //     minWidth: 260,
+        //     borderRadius: 2,
+        //     boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+        //     overflow: "hidden",
+        //   },
+        // }}
+        // MenuListProps={{ sx: { p: 0 } }}
       >
         <MenuItem
           onClick={onProfile}
@@ -48,13 +63,13 @@ export const UserDropdownMenu = ({
             fontWeight: 500,
           }}
         >
-          <ListItemText 
+          <ListItemText
             primary={user.name}
             secondary={user.email}
           />
         </MenuItem>
 
-        <Divider style={{margin: 0}}/>
+        <Divider style={{ margin: 0 }} />
 
         {/* Logout */}
         <MenuItem
