@@ -1,5 +1,5 @@
-import { CrudOp, DetailsStatus } from "datacenter-lib-react-ts"
 import { StrictOmit } from "fwork-jsts-common";
+import { CrudOp, DetailsStatus } from './index';
 
 export type NewController<T> = {
   getInitData: () => T,

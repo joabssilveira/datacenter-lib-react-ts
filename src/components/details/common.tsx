@@ -1,12 +1,5 @@
 import { styled, TextField, Typography } from '@mui/material';
 
-export enum DetailsStatus {
-  undefined,
-  saving,
-  success,
-  error,
-}
-
 export const StepContentStyled = styled('div')(({ }) => ({
   display: 'flex',
   gap: 20,

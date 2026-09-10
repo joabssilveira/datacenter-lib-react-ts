@@ -1,7 +1,8 @@
 import { Button, Typography } from "@mui/material"
-import { DetailsStatus, NewWizardController } from "datacenter-lib-react-ts"
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { DetailsStatus } from "../../types"
+import { NewWizardController } from "../../types/controller"
 
 export const StepperFinishConfirmComponent = <T,>(args: {
   controller: NewWizardController<T>,
