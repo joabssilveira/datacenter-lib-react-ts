@@ -58,7 +58,7 @@
 		"@mui/x-date-pickers": "^9.12.0",
 		"@reduxjs/toolkit": "^2.12.0",
 		"datacenter-lib-common-ts": "^1.2.5",
-		"fwork-jsts-browser": "^0.0.6",
+		"fwork-jsts-browser": "^0.0.7",
 		"fwork-jsts-common": "^2.0.21",
 		"fwork-react-mui-ext": "^2.2.0",
 		"react": "^17.0.0 || ^18.0.0 || ^19.0.0",
@@ -79,7 +79,7 @@
 		"release": "standard-version",
 		"pub": "npm run build && npm run release && git push --follow-tags origin main && npm publish"
 	},
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"exports": {
 		".": {
 			"types": "./dist/types/index.d.ts",
