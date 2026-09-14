@@ -2,7 +2,6 @@ import { Grid, GridProps } from "@mui/material"
 import { FloatActionButtonComponent, IFloatActionButtonComponentProps } from "fwork-react-mui-ext"
 import React, { ReactNode } from "react"
 import { HeaderComponent, IHeaderComponentProps } from "../header"
-import styles from './style.module.scss'
 import { StrictOmit } from "fwork-jsts-common"
 
 export interface DetailsGridComponentItem {
@@ -77,7 +76,7 @@ export interface IDetailsComponentProps extends React.DetailedHTMLProps<React.HT
 export const DetailsComponent: React.FC<IDetailsComponentProps> = ({ children, footer, headerProps, contentProps, floatBtnProps, ...props }) => {
   const { hide: floatBtnPropsHide, ...floatBtnPropsRest } = floatBtnProps ?? {}
 
-  return <div {...props} id={props.id ?? 'DetailsComponent'} className={styles.root}>
+  return <div {...props} id={props.id ?? 'DetailsComponent'} style={{display: 'flex', flexDirection: 'column'}}>
     <HeaderComponent
       {...headerProps} className={`${headerProps?.className}`}
     />
