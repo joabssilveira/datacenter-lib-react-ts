@@ -12,7 +12,8 @@ export interface IAuthRequiredComponentProps {
 }
 
 export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({
-  authUrlBase, redirectUrl, children }) => {
+  authUrlBase, redirectUrl, children
+}) => {
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
   const authUuid = queryParams.get(AuthUtils.authUuidQueryStringName)
@@ -36,7 +37,7 @@ export const AuthRequiredComponent: React.FC<IAuthRequiredComponentProps> = ({
     }
   }, [auth.isAuthenticated, auth.loading]);
 
-  if (!auth.isAuthenticated) 
+  if (!auth.isAuthenticated)
     return null;
 
   return <>{children}</>

@@ -11,7 +11,8 @@ export interface IAuthCheckComponentProps {
 }
 
 export const AuthCheckComponent: React.FC<IAuthCheckComponentProps> = ({
-  baseApiUrl, children }) => {
+  baseApiUrl, children 
+}) => {
   const navigate = useNavigate()
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
