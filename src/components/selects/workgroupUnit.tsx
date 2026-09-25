@@ -38,6 +38,7 @@ export const SelectWorkgroupUnitComponent: FC<SelectPropsBase<IWorkgroupUnit>> =
       }
 
     const _defaultNested: Nested<IWorkgroupUnit> = {
+      workgroup: true,
       legalPerson: {
         nested: {
           workgroup: true
