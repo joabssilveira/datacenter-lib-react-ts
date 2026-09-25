@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.23](https://github.com/joabssilveira/datacenter-lib-react-ts/compare/v1.0.22...v1.0.23) (2026-09-25)
+
+
+### Bug Fixes
+
+* defaultNested SelectWorkgroupUnitComponent ([1ebf1ef](https://github.com/joabssilveira/datacenter-lib-react-ts/commit/1ebf1ef68d02e41e601bbbe46144bc4d4f8805ac))
+
 ### [1.0.22](https://github.com/joabssilveira/datacenter-lib-react-ts/compare/v1.0.21...v1.0.22) (2026-09-21)
 
 ### [1.0.21](https://github.com/joabssilveira/datacenter-lib-react-ts/compare/v1.0.20...v1.0.21) (2026-09-21)
