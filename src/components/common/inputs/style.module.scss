@@ -1,0 +1,196 @@
+/* Variáveis (suporte light/dark automático) */
+:root,
+.light {
+  --border-default: rgba(0, 0, 0, 0.23);
+  --border-hover: rgba(0, 0, 0, 0.87);
+  --border-focus: #1976d2;
+  // --bg-disabled: rgba(0, 0, 0, 0.06);
+  
+  --error: #D32F2F;
+
+  // 
+  --bg-surface: #ffffff;
+  --text-primary: rgba(0, 0, 0, 0.87);
+
+  --item-hover-bg: #F5F5F5;
+  --item-hover-text: rgba(0, 0, 0, 0.87);
+}
+
+:root,
+.dark {
+  --border-default: rgba(255, 255, 255, 0.23);
+  --border-hover: rgba(255, 255, 255, 0.87);
+  --error: #F44336;
+
+  // 
+  --bg-surface: #2F3E56;
+  --text-primary: ##ffffff;
+
+  --item-hover-bg: rgba(255, 255, 255, 0.08);
+  --item-hover-text: #ffffff;
+}
+
+
+/* Base comum */
+.outlined-field {
+  width: 100%;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+  // transition: border-color 0.2s, border-width 0.2s;
+  border: 1px solid var(--border-default);
+
+  /* Remove setas up down no Firefox quando type = number */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Remove setas up down no Chrome, Safari, Edge e Opera quando type = number */
+.outlined-field::-webkit-outer-spin-button,
+.outlined-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hover */
+.outlined-field:hover:not(.error):not(:disabled) {
+  border-color: var(--border-hover);
+}
+
+/* Focus */
+.outlined-field:focus {
+  border-width: 2px;
+  padding: 7px;
+  /* compensa o +1px; mesmo com box-sizing precisou */
+}
+
+.outlined-field:focus:not(.error) {
+  border-color: var(--border-focus);
+}
+
+/* Disabled */
+.outlined-field:disabled {
+  border-color: var(--border-default);
+  background: var(--bg-disabled);
+  // cursor: not-allowed;
+}
+
+/* Select (remove estilo nativo feio) */
+.outlined-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* Textarea ajuste */
+.outlined-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.label {
+  font-size: small;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.error {
+  border-color: var(--error);
+  color: var(--error)
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  // justify-content: space-between;
+}
+
+// XInput
+
+.info-wrapper {
+  background-color: inherit;
+  background: inherit;
+  position: relative;
+}
+
+.info {
+  background-color: inherit;
+  background: inherit;
+  padding: 7px 11.5px !important;
+  border: 1px solid var(--border-default);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  font-weight: 400;
+  height: 36.13px;
+}
+
+.info-label {
+  background-color: inherit;
+  background: inherit;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(14px, 7px) scale(1);
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  font-weight: 400;
+  height: 36.13px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.info-label.with-value {
+  transform: translate(-5px, -13px) scale(0.75);
+  background-color: inherit;
+  background: inherit;
+  height: auto;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.arrow {
+  position: absolute;
+
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  transition: transform 0.2s ease;
+}
+
+/* aberto */
+.open {
+  transform: translateY(-50%) rotate(180deg);
+}
