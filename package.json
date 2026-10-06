@@ -78,11 +78,12 @@
 	},
 	"scripts": {
 		"build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json",
+		"postbuild": "node postbuild.cjs",
 		"prepare": "husky",
 		"release": "standard-version",
 		"pub": "npm run build && npm run release && git push --follow-tags origin main && npm publish"
 	},
-	"version": "1.0.24",
+	"version": "1.0.25",
 	"exports": {
 		".": {
 			"types": "./dist/types/index.d.ts",
