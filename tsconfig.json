@@ -1,6 +1,6 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "postbuild.cjs"],
   "compilerOptions": {
     // "module": "nodenext"
     // O module determina qual sistema de módulos o TypeScript usará para gerenciar e emitir os arquivos. Por que NodeNext? 
