@@ -37,7 +37,7 @@ function copyFolderRecursive(source, destination, extensions) {
 // ---------------------------------------------------------------------------
 
 const srcDir = path.resolve(__dirname, './src');
-const extensions = ['.scss', '.css'];
+const extensions = ['.scss', '.css', '.ttf'];
 const targets = ['./dist/cjs', './dist/esm'];
 
 if (!fs.existsSync(srcDir)) {
